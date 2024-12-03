@@ -1,0 +1,59 @@
+{
+  "goldPriceCalculatorBtn": {
+    "message": "金价计算器"
+  },
+  "goldPriceChartBtn": {
+    "message": "金价历史价格图表"
+  },
+  "chartTitle": {
+    "message": "国际黄金价格历史走势"
+  },
+  "goldPriceCalculatorTitle": {
+    "message": "国际黄金价格计算器"
+  },
+  "goldPriceCalculatorLabel": {
+    "message": "选择输入币种和金价"
+  },
+  "usdPerOunce": {
+    "message": "美元/盎司"
+  },
+  "cnyPerOunce": {
+    "message": "人民币/盎司"
+  },
+  "usdPerGram": {
+    "message": "美元/克"
+  },
+  "cnyPerGram": {
+    "message": "人民币/克"
+  },
+  "priceInput": {
+    "message": "请输入每盎司金价"
+  },
+  "realTimeExchangeRate": {
+    "message": "实时汇率: 1美元"
+  },
+  "cnyText": {
+    "message": "人民币"
+  },
+  "usdText": {
+    "message": "美元"
+  },
+  "cnyPriceText": {
+    "message": "人民币"
+  },
+  "usdPriceText": {
+    "message": "美元"
+  },
+  "goldPriceText": {
+    "message": "金价"
+  },
+  "calculationError": {
+    "message": "计算出错，请稍后再试"
+  },
+  "getExchangeRateError": {
+    "message": "汇率获取失败"
+  },
+  "goldPriceInputError": {
+    "message": "请输入有效的金价"
+  }
+}

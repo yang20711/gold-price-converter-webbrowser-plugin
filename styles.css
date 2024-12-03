@@ -1,0 +1,43 @@
+.gold-price-tooltip {
+  position: fixed;
+  background-color: #f0f0f0; /* 浅灰色背景 */
+  border: 1px solid #d1d1d1; /* 平面灰色边框 */
+  padding: 10px; /* 一致的填充 */
+  border-radius: 4px; /* 扁平化设计的圆角 */
+  z-index: 10000;
+  font-size: 14px; /* 可读的字体大小 */
+  max-width: 400px;
+  word-wrap: break-word;
+  color: #333; /* 深色字体提高可读性 */
+  font-family: 'Arial', sans-serif;
+  pointer-events: none; /* 防止工具提示阻挡鼠标事件 */
+  opacity: 0.95;
+  box-shadow: none; /* 移除阴影，扁平化设计 */
+  transition: opacity 0.2s ease-in-out; /* 平滑的透明度过渡 */
+}
+
+.tooltip-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 两列布局 */
+  justify-content: start;
+  margin-bottom: 4px;
+}
+
+.tooltip-label {
+  font-weight: bold;
+  color: #555; /* 标签的颜色 */
+  text-align: left; /* 左对齐 */
+}
+
+.tooltip-data {
+  text-align: left; /* 数据左对齐 */
+}
+
+.highlight-price {
+  font-weight: bold;
+  color: green;
+  font-size: 16px; /* 加大字体 */
+  background-color: #e0ffe0; /* 轻微绿色背景突出显示 */
+  padding: 2px 4px;
+  border-radius: 4px;
+}

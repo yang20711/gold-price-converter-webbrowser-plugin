@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "Gold Price Converter",
+  "version": "1.1",
+  "description": "Convert XAUUSD price to CNY in real-time",
+  "permissions": ["activeTab", "storage", "tabs"],
+  "host_permissions": [
+    "https://cn.tradingview.com/*",
+    "https://cn.investing.com/*",
+    "https://api.exchangerate-api.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://cn.tradingview.com/symbols/XAUUSD/*",
+        "https://cn.investing.com/currencies/*"
+      ],
+      "js": ["content.js"],
+      "css": ["styles.css"]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Gold Price Converter",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/logo.png"
+    }
+  },
+  "default_locale": "zh_CN",
+  "web_accessible_resources": [{
+    "resources": ["js/*.js"],
+    "matches": ["<all_urls>"]
+  }]
+  
+
+}

@@ -1,0 +1,59 @@
+{
+  "goldPriceCalculatorBtn": {
+    "message": "Gold Price Calculator"
+  },
+  "goldPriceChartBtn": {
+    "message": "Gold Price History Chart"
+  },
+  "chartTitle": {
+    "message": "Historical Trend of International Gold Prices"
+  },
+  "goldPriceCalculatorTitle": {
+    "message": "International Gold Price Calculator"
+  },
+  "goldPriceCalculatorLabel": {
+    "message": "Select Input Currency and Gold Price"
+  },
+  "usdPerOunce": {
+    "message": "USD/Ounce"
+  },
+  "cnyPerOunce": {
+    "message": "CNY/Ounce"
+  },
+  "usdPerGram": {
+    "message": "USD/Gram"
+  },
+  "cnyPerGram": {
+    "message": "CNY/Gram"
+  },
+  "priceInput": {
+    "message": "Please enter the gold price per ounce"
+  },
+  "realTimeExchangeRate": {
+    "message": "Real-time exchange rate: 1 USD"
+  },
+  "cnyText": {
+    "message": "CNY"
+  },
+  "usdText": {
+    "message": "USD"
+  },
+  "cnyPriceText": {
+    "message": "CNY"
+  },
+  "usdPriceText": {
+    "message": "USD"
+  },
+  "goldPriceText": {
+    "message": "Gold Price"
+  },
+  "calculationError": {
+    "message": "Calculation error, please try again later"
+  },
+  "getExchangeRateError": {
+    "message": "Failed to get exchange rate"
+  },
+  "goldPriceInputError": {
+    "message": "Please enter a valid gold price"
+  }
+}
