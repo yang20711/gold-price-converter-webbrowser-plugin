@@ -74,7 +74,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
     return true;
   } else if (request.action === 'dbInstance') {
-     goldPriceDB.goldPriceItems.orderBy('source')
+    goldPriceDB.goldPriceItems.orderBy('source')
       .distinct()
       .uniqueKeys().then(data => {
         sendResponse({ data });

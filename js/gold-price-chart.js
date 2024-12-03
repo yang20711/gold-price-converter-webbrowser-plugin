@@ -134,11 +134,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const ctx = document.getElementById('goldPriceChart').getContext('2d');
 
         new Chart(ctx, {
-            legend: '国际金价',
             type: 'line',
             data: {
-                labels,
-                datasets
+                labels, // 时间数据
+                datasets // 动态生成的折线数据
             },
             options: {
                 responsive: true,
@@ -169,19 +168,31 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 },
                 plugins: {
+                    zoom: {
+                        zoom: {
+                            wheel: {
+                                enabled: true // 启用滚轮缩放
+                            },
+                            pinch: {
+                                enabled: true // 支持触摸屏的双指缩放
+                            },
+                            mode: 'x' // 仅沿X轴缩放
+                        },
+                        pan: {
+                            enabled: true, // 启用拖拽平移
+                            mode: 'x' // 仅沿X轴拖拽
+                        },
+                        limits: {
+                            x: { min: 0, max: labels.length - 1 } // 限制拖拽范围
+                        }
+                    },
                     title: {
-                        display: true, // 启用标题
-                        text: '国际多渠道金价曲线图', // 标题内容
-                        font: {
-                            size: 18, // 字体大小
-                            weight: 'bold' // 字体粗细
-                        },
-                        color: '#333333', // 标题颜色
-                        padding: {
-                            top: 10, // 标题上方间距
-                            bottom: 10 // 标题下方间距
-                        },
-                        align: 'center' // 标题对齐方式：'start', 'center', 'end'
+                        display: true,
+                        text: '国际多渠道金价曲线图',
+                        font: { size: 18, weight: 'bold' },
+                        color: '#333333',
+                        padding: { top: 10, bottom: 10 },
+                        align: 'center'
                     },
                     legend: {
                         display: true,
@@ -199,6 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
+
     });
 
 });

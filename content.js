@@ -42,8 +42,21 @@
     `;
 
         // 设置工具提示位置
-        tooltip.style.left = `${event.clientX + 5}px`;
-        tooltip.style.top = `${event.clientY + 5}px`;
+        // tooltip.style.left = `${event.clientX + 5}px`;
+        // tooltip.style.top = `${event.clientY + 5}px`;
+
+
+        // 设置 Tooltip 的宽度和高度（如果是动态内容，需先确保渲染后才能获取）
+        tooltip.style.position = 'absolute'; // 确保位置类型为绝对定位
+        tooltip.style.transform = 'translate(-50%, -50%)'; // 使用 CSS 平移实现居中
+
+        // 计算屏幕中心的位置
+        const centerX = window.innerWidth / 2; // 水平居中
+        const centerY = window.innerHeight / 2; // 垂直居中
+
+        // 将 Tooltip 放置到屏幕正中间
+        tooltip.style.left = `${centerX}px`;
+        tooltip.style.top = `${centerY}px`;
 
         document.body.appendChild(tooltip);
         activeTooltip = tooltip;
@@ -66,36 +79,73 @@
         }
     }
 
+    let targetElement = fetchElementsForCurrentDomain();
+
     // 页面点击事件监听器
-    document.body.addEventListener('click', async (event) => {
-
-        let targetElement = fetchElementsForCurrentDomain();
-        if (targetElement) {
-            // 如果有现存的工具提示，先移除
-            removeTooltip();
-            try {
-                // 发送消息到后台脚本请求价格转换
-                const response = await chrome.runtime.sendMessage({
-                    action: 'convertPrice',
-                    price: targetElement.item(0).textContent.replace(/,/g, ''),
-                    domain: new URL(window.location.href).hostname.replace(/^(www\.)?/, '').replace(/^www\./, '').replace(/^([^\.]+\.[^\.]+)$/, '$1')
-                });
-
-                // 创建新的工具提示
-                createTooltip(response, event);
-            } catch (error) {
-                console.error('价格转换错误:', error);
+    /*    
+     document.body.addEventListener('click', async (event) => {
+    
+            if (targetElement) {
+                // 如果有现存的工具提示，先移除
+                removeTooltip();
+                try {
+                    // 发送消息到后台脚本请求价格转换
+                    const response = await chrome.runtime.sendMessage({
+                        action: 'convertPrice',
+                        price: targetElement.item(0).textContent.replace(/,/g, ''),
+                        domain: new URL(window.location.href).hostname.replace(/^(www\.)?/, '').replace(/^www\./, '').replace(/^([^\.]+\.[^\.]+)$/, '$1')
+                    });
+    
+                    // 创建新的工具提示
+                    createTooltip(response, event);
+                } catch (error) {
+                    console.error('价格转换错误:', error);
+                }
+            } else {
+                // 点击非目标元素时，移除工具提示
+                removeTooltip();
             }
-        } else {
-            // 点击非目标元素时，移除工具提示
-            removeTooltip();
-        }
+        });
+     */
+
+    // 创建MutationObserver实例
+    const observer = new MutationObserver((mutationsList) => {
+        mutationsList.forEach(async (mutation) => {
+            if (mutation.type === 'characterData' || mutation.type === 'childList') {
+                if (targetElement) {
+                    // 如果有现存的工具提示，先移除
+                    removeTooltip();
+                    try {
+                        // 发送消息到后台脚本请求价格转换
+                        const response = await chrome.runtime.sendMessage({
+                            action: 'convertPrice',
+                            price: targetElement.item(0).textContent.replace(/,/g, ''),
+                            domain: new URL(window.location.href).hostname.replace(/^(www\.)?/, '').replace(/^www\./, '').replace(/^([^\.]+\.[^\.]+)$/, '$1')
+                        });
+
+                        // 创建新的工具提示
+                        createTooltip(response);
+                    } catch (error) {
+                        console.error('价格转换错误:', error);
+                    }
+                } else {
+                    // 点击非目标元素时，移除工具提示
+                    removeTooltip();
+                }
+            }
+        });
     });
 
-    // 第5秒点击一次body,用于自动记录价格
-    setInterval(() => {
-        document.body.click();
-    }, 5000);
+    // 配置观察选项
+    const config = {
+        characterData: true, // 监听节点内容或文本变化
+        childList: true, // 监听子节点变化（包括文本节点添加/删除）
+        subtree: true // 监听子孙节点
+    };
+
+    // 开始观察
+    observer.observe(targetElement.item(0), config);
+
 
     function fetchElementsForCurrentDomain() {
         // 获取当前页面的一级域名
